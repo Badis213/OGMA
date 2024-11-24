@@ -1,0 +1,92 @@
+@font-face {
+    font-family: 'LOT';
+    src: url('Fonts/LOT.otf') format('truetype');
+}
+
+h1 {
+    font-family: 'LOT', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    color: #fff;
+}
+
+header {
+    background-color: #111;
+    padding: 1em 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 10;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2em;
+}
+
+nav .logo img {
+    height: 50px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1em;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #f0c674;
+}
+
+section {
+    padding: 4em 2em;
+    margin-top: 5em;
+}
+
+#accueil {
+    text-align: center;
+    background-color: #111;
+    padding: 5em 2em;
+}
+
+#accueil h1 {
+    font-size: 3em;
+    color: #f0c674;
+}
+
+button {
+    background-color: #f0c674;
+    border: none;
+    padding: 0.5em 1em;
+    color: #000;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #dda43c;
+}
+
+footer {
+    text-align: center;
+    padding: 1em;
+    background-color: #111;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}

@@ -1,0 +1,119 @@
+@font-face {
+    font-family: 'LOT';
+    src: url('../fonts/LOT.otf') format('truetype');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.separation {
+    border: none;
+    border-top: 2px solid #FFF; /* Couleur et épaisseur de la ligne */
+    margin: 50px 0; /* Espace autour de la ligne */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: white;
+    line-height: 1.6;
+}
+
+h1, h2, h3, p {
+    margin-bottom: 20px;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Hero */
+header {
+    height: 100vh;
+    background: url('../img/background_debat.JPG') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 90px;
+    letter-spacing: 2px;
+    color: white;
+    font-family: 'LOT';
+}
+
+header p {
+    font-size: 1.5rem;
+    margin-top: 10px;
+    color: white;
+}
+
+.btn-apropos {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #FFF;
+    color: black;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-apropos:hover {
+    background-color: #a7a7a7;
+}
+
+/* Présentation */
+
+#a-propos {
+    padding-top: 60px;
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-bottom: 0px;
+    background-color: black;
+}
+
+#a-propos h2 {
+    text-align: center;
+}
+
+#a-propos .image-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#a-propos img {
+    height: 47%;
+    width: 47%;
+    border-radius: 8px;
+}
+
+/* Footer */
+footer {
+    background-color: #111;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+footer .social-links {
+    margin-top: 10px;
+}
+
+footer .social-links a {
+    margin: 0 15px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+footer .social-links a:hover {
+    color: #a7a7a7;
+}
