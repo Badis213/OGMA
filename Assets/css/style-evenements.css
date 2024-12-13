@@ -1,3 +1,4 @@
+/* Police personnalisée */
 @font-face {
     font-family: 'LOT';
     src: url('../fonts/LOT.otf') format('truetype');
@@ -9,6 +10,15 @@
     box-sizing: border-box;
 }
 
+/* Global styles for body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: white;
+    line-height: 1.6;
+    padding-top: 20px;
+}
+
 /* Navbar container */
 .navbar {
     display: flex;
@@ -17,8 +27,8 @@
     padding: 20px 30px;
     background-color: #111; /* Fond sombre pour la navbar */
     position: fixed;
-    width: 100%;
     top: 0;
+    width: 100%;
     z-index: 1000;
 }
 
@@ -118,42 +128,18 @@
         display: none; /* Cacher les liens d'inscription et connexion sur mobile */
     }
 }
-
-.separation {
-    border: none;
-    border-top: 2px solid #FFF; /* Couleur et épaisseur de la ligne */
-    margin: 50px 0; /* Espace autour de la ligne */
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #000;
-    color: white;
-    line-height: 1.6;
-}
-
-h1, h2, h3, p {
-    margin-bottom: 20px;
-}
-
-a {
-    text-decoration: none;
-}
-
-/* Hero */
+/* Hero section for Événements page */
 header {
-    height: 100vh;
-    background: url('../img/background_debat.JPG') no-repeat center center/cover;
+    height: 50vh;
+    background: url('../img/background_evenement.JPG') no-repeat center center/cover;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-
 }
 
 header h1 {
-    font-size: 90px;
-    letter-spacing: 2px;
+    font-size: 50px;
     color: white;
     font-family: 'LOT';
 }
@@ -164,32 +150,74 @@ header p {
     color: white;
 }
 
-.btn-apropos {
+/* Événements Section */
+#evenements {
+    padding: 60px 60px;
+    background-color: black;
+    text-align: center;
+}
+
+#evenements h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: white;
+}
+
+.event-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.event {
+    background-color: #222;
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: left;
+}
+
+.event h3 {
+    font-size: 1.8rem;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.event .event-date {
+    font-size: 1rem;
+    color: #aaa;
+    margin-bottom: 15px;
+}
+
+.event .event-description {
+    font-size: 1rem;
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+/* Bouton Voir Plus */
+.btn-event {
     display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #FFF;
-    color: black;
+    background-color: #444;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 30px;
+    text-decoration: none;
     font-weight: bold;
     text-transform: uppercase;
-    border-radius: 30px;
     transition: background-color 0.3s ease;
 }
 
-.btn-apropos:hover {
-    background-color: #a7a7a7;
+.btn-event:hover {
+    background-color: #666;
 }
 
-/* Style pour le bouton d'inscription à l'événement */
-.event-registration {
-    text-align: center;
-    padding-top: 30px;
-}
-
+/* Bouton "S'inscrire à l'événement" */
 .btn-inscription {
     display: inline-block;
-    font-size: 19px;
-    background-color: #28a745; /* Vert comme sur la page événements */
+    background-color: #28a745;
     color: white;
     padding: 8px 16px;
     border-radius: 30px;
@@ -197,42 +225,14 @@ header p {
     font-weight: bold;
     text-transform: uppercase;
     margin-top: 10px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: background-color 0.3s ease;
 }
 
 .btn-inscription:hover {
-    background-color: #218838; /* Vert plus foncé lors du survol */
-    transform: scale(1.05); /* Légère augmentation de taille */
-    cursor: pointer;
+    background-color: #218838;
 }
 
-/* Présentation */
-
-#a-propos {
-    padding-top: 60px;
-    padding-left: 60px;
-    padding-right: 60px;
-    padding-bottom: 0px;
-    background-color: black;
-}
-
-#a-propos h2 {
-    text-align: center;
-}
-
-#a-propos .image-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-#a-propos img {
-    height: 47%;
-    width: 47%;
-    border-radius: 8px;
-}
-
-/* Footer */
+/* Footer styles */
 footer {
     background-color: #111;
     color: white;

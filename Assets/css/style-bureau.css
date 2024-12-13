@@ -1,3 +1,4 @@
+/* Style général */
 @font-face {
     font-family: 'LOT';
     src: url('../fonts/LOT.otf') format('truetype');
@@ -9,6 +10,15 @@
     box-sizing: border-box;
 }
 
+/* Global styles for body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: white;
+    line-height: 1.6;
+    padding-top: 80px;
+}
+
 /* Navbar container */
 .navbar {
     display: flex;
@@ -17,8 +27,8 @@
     padding: 20px 30px;
     background-color: #111; /* Fond sombre pour la navbar */
     position: fixed;
-    width: 100%;
     top: 0;
+    width: 100%;
     z-index: 1000;
 }
 
@@ -119,117 +129,66 @@
     }
 }
 
-.separation {
-    border: none;
-    border-top: 2px solid #FFF; /* Couleur et épaisseur de la ligne */
-    margin: 50px 0; /* Espace autour de la ligne */
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #000;
-    color: white;
-    line-height: 1.6;
-}
-
-h1, h2, h3, p {
-    margin-bottom: 20px;
-}
-
-a {
-    text-decoration: none;
-}
-
-/* Hero */
+/* Section du bureau provisoire */
 header {
-    height: 100vh;
-    background: url('../img/background_debat.JPG') no-repeat center center/cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     text-align: center;
-
+    padding: 60px 20px 20px;
+    background-color: #000;
 }
 
 header h1 {
-    font-size: 90px;
-    letter-spacing: 2px;
+    font-size: 50px;
     color: white;
     font-family: 'LOT';
 }
 
 header p {
     font-size: 1.5rem;
-    margin-top: 10px;
     color: white;
-}
-
-.btn-apropos {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #FFF;
-    color: black;
-    font-weight: bold;
-    text-transform: uppercase;
-    border-radius: 30px;
-    transition: background-color 0.3s ease;
-}
-
-.btn-apropos:hover {
-    background-color: #a7a7a7;
-}
-
-/* Style pour le bouton d'inscription à l'événement */
-.event-registration {
-    text-align: center;
-    padding-top: 30px;
-}
-
-.btn-inscription {
-    display: inline-block;
-    font-size: 19px;
-    background-color: #28a745; /* Vert comme sur la page événements */
-    color: white;
-    padding: 8px 16px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: bold;
-    text-transform: uppercase;
     margin-top: 10px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.btn-inscription:hover {
-    background-color: #218838; /* Vert plus foncé lors du survol */
-    transform: scale(1.05); /* Légère augmentation de taille */
-    cursor: pointer;
-}
-
-/* Présentation */
-
-#a-propos {
-    padding-top: 60px;
-    padding-left: 60px;
-    padding-right: 60px;
-    padding-bottom: 0px;
-    background-color: black;
-}
-
-#a-propos h2 {
+/* Conteneur des membres du bureau */
+#bureau-provisoire {
+    padding: 20px;
     text-align: center;
 }
 
-#a-propos .image-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+#bureau-provisoire h2 {
+    font-size: 30px;
+    margin-bottom: 40px;
 }
 
-#a-propos img {
-    height: 47%;
-    width: 47%;
-    border-radius: 8px;
+/* Style pour chaque membre */
+.members-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.member {
+    background-color: #1c1c1c;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.member-photo img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.member-info h3 {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.member-info p {
+    font-size: 16px;
 }
 
 /* Footer */

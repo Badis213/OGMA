@@ -1,16 +1,15 @@
-@font-face {
-    font-family: 'LOT';
-    src: url('../fonts/LOT.otf') format('truetype');
-}
-
-* {
+/* Style général pour les pages d'authentification et de profil */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #111;
+    color: white;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 /* Navbar container */
 .navbar {
+    box-sizing: border-box;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -119,138 +118,79 @@
     }
 }
 
-.separation {
-    border: none;
-    border-top: 2px solid #FFF; /* Couleur et épaisseur de la ligne */
-    margin: 50px 0; /* Espace autour de la ligne */
+/* Section d'authentification */
+.auth-section {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    background-color: #222;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #000;
-    color: white;
-    line-height: 1.6;
-}
-
-h1, h2, h3, p {
+.auth-section h2 {
+    text-align: center;
     margin-bottom: 20px;
 }
 
-a {
-    text-decoration: none;
-}
-
-/* Hero */
-header {
-    height: 100vh;
-    background: url('../img/background_debat.JPG') no-repeat center center/cover;
+.auth-section form {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-
+    flex-direction: column;
 }
 
-header h1 {
-    font-size: 90px;
-    letter-spacing: 2px;
-    color: white;
-    font-family: 'LOT';
-}
-
-header p {
-    font-size: 1.5rem;
-    margin-top: 10px;
+.auth-section input {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background-color: #333;
     color: white;
 }
 
-.btn-apropos {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #FFF;
-    color: black;
-    font-weight: bold;
-    text-transform: uppercase;
-    border-radius: 30px;
-    transition: background-color 0.3s ease;
-}
-
-.btn-apropos:hover {
-    background-color: #a7a7a7;
-}
-
-/* Style pour le bouton d'inscription à l'événement */
-.event-registration {
-    text-align: center;
-    padding-top: 30px;
-}
-
-.btn-inscription {
-    display: inline-block;
-    font-size: 19px;
-    background-color: #28a745; /* Vert comme sur la page événements */
+.auth-section button {
+    padding: 10px;
+    background-color: #444;
     color: white;
-    padding: 8px 16px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: bold;
-    text-transform: uppercase;
-    margin-top: 10px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.btn-inscription:hover {
-    background-color: #218838; /* Vert plus foncé lors du survol */
-    transform: scale(1.05); /* Légère augmentation de taille */
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-/* Présentation */
-
-#a-propos {
-    padding-top: 60px;
-    padding-left: 60px;
-    padding-right: 60px;
-    padding-bottom: 0px;
-    background-color: black;
+.auth-section button:hover {
+    background-color: #555;
 }
 
-#a-propos h2 {
+.auth-section p {
     text-align: center;
 }
 
-#a-propos .image-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.auth-section a {
+    color: #a7a7a7;
+    text-decoration: none;
 }
 
-#a-propos img {
-    height: 47%;
-    width: 47%;
-    border-radius: 8px;
-}
-
-/* Footer */
-footer {
-    background-color: #111;
+.auth-section a:hover {
     color: white;
+}
+
+/* Profil */
+.profile-section {
+    margin-top: 80px;
     padding: 20px;
     text-align: center;
 }
 
-footer .social-links {
-    margin-top: 10px;
-}
-
-footer .social-links a {
-    margin: 0 15px;
+.profile-section button {
+    background-color: #444;
     color: white;
-    font-weight: bold;
-    text-transform: uppercase;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-footer .social-links a:hover {
-    color: #a7a7a7;
+.profile-section button:hover {
+    background-color: #555;
 }

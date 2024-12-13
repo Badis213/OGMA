@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Page d'inscription à l'association OGMA">
+    <title>S'inscrire - OGMA</title>
+    <link rel="stylesheet" href="../Assets/css/auth.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">OGMA</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="evenements.html">Événements</a></li>
+            <li><a href="bureau-provisoire.html">Bureau Provisoire</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html">Se connecter</a></li>
+        </ul>
+    </nav>
+
+    <section class="auth-section">
+        <h2>S'inscrire</h2>
+        <form action="/register" method="POST">
+            <label for="username">Nom d'utilisateur</label>
+            <input type="text" id="username" name="username" placeholder="Nom d'utilisateur" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Votre email" required>
+
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="password" placeholder="Votre mot de passe" required>
+
+            <label for="confirm-password">Confirmer le mot de passe</label>
+            <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirmez votre mot de passe" required>
+
+            <button type="submit">S'inscrire</button>
+        </form>
+
+        <p>Déjà inscrit ? <a href="login.html">Se connecter ici</a></p>
+    </section>
+</body>
+</html>

@@ -6,8 +6,28 @@
     <meta name="description" content="Association OGMA : Développer l'esprit critique et lutter contre la désinformation">
     <title>OGMA - Association des lycéens</title>
     <link rel="stylesheet" href="..\Assets\css\style.css">
+    <script src="..\Assets\js\script.js"></script>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="logo">OGMA</div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#a-propos">Accueil</a></li>
+            <li><a href="evenements.html">Évenements</a></li>
+            <li><a href="bureau-provisoire.html">Bureau Provisoire</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li id="auth-links">
+                <a href="signin.html" id="signin">S'inscrire</a>
+            </li>
+            <li id="auth-links">
+                <a href="login.html" id="login">Se connecter</a>
+            </li>
+            <li id="profile-link" style="display: none;">
+                <a href="profile.html">Profil</a>
+            </li>
+        </ul>
+    </nav>
+    
 
     <!-- Bandeau principal -->
     <header>
@@ -31,14 +51,17 @@
             <img src="../Assets/img/img_fiche.JPG" alt="Fiche" class="image-presentation">
         </div>
 
-        <hr class="separation">
-        
+    <div class="event-registration">
+        <button class="btn-inscription" onclick="window.location.href='evenements.html'">S'inscrire à un événement</button>
+    </div>
+
+        <hr class="separation">        
     </section>
 
 
     <footer>
         <div class="footer-content">
-            <p>&copy 2024 OGMA - Association</p>
+            <p>&copy 2024 OGMA - Tous droits réservés</p>
             <div class="social-links">
                 <a href="https://instagram.com/ogma_asso" target="_blank">Instagram</a>
             </div>
