@@ -28,7 +28,6 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    left: 0; /* Assure que la navbar commence bien à gauche */
     z-index: 1000;
 }
 
@@ -221,4 +220,110 @@ footer .social-links a {
 
 footer .social-links a:hover {
     color: #a7a7a7;
+}
+
+/* Styles de la boîte modale */
+.modal {
+    display: none; /* Par défaut, la modale est cachée */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Fond sombre semi-transparent */
+    justify-content: center;
+    align-items: center;
+    z-index: 10000; /* S'assure que la modale est au-dessus de tout */
+}
+
+.modal-content {
+    background: #222;
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.3s ease-in-out;
+    position: relative;
+}
+
+.modal-content h3 {
+    margin-bottom: 10px;
+    font-size: 2rem;
+    font-family: 'Arial', Arial, sans-serif;
+}
+
+.modal-content p {
+    margin-bottom: 15px;
+    line-height: 1.5;
+    font-size: 1.1rem;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    color: white;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+    color: #aaa;
+}
+
+/* Animation d'apparition */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Bouton hamburger pour mobile */
+.hamburger {
+    display: none;
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.hamburger:hover {
+    color: #aaa;
+}
+
+/* Styles pour la navbar en mode mobile */
+@media (max-width: 1000px) {
+    .hamburger {
+        display: block; /* Affiche le bouton hamburger sur petit écran */
+    }
+
+    .nav-links {
+        display: none; /* Cache les liens par défaut */
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background-color: #111;
+        width: 100%;
+        padding: 20px 0;
+        text-align: center;
+        z-index: 9999;
+    }
+
+    .nav-links.active {
+        display: flex; /* Affiche les liens quand actif */
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+    }
 }

@@ -5,70 +5,132 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Événements organisés par l'Association OGMA">
     <title>Événements - OGMA</title>
-    <link rel="stylesheet" href="../Assets/css/style-evenements.css"> <!-- Lien vers le CSS spécifique de la page Événements -->
+    <link rel="stylesheet" href="Assets/css/style-evenements.css"> <!-- Lien vers le CSS spécifique de la page Événements -->
 </head>
 <body>
     <nav class="navbar">
         <div class="logo">OGMA</div>
-        <ul class="nav-links">
+        <!-- Bouton hamburger -->
+        <div class="hamburger" id="hamburger">
+            &#9776; <!-- Symbole hamburger -->
+        </div>
+        <ul class="nav-links" id="nav-links">
             <li><a href="index.html">Accueil</a></li>
-            <li><a href="evenements.html">Événements</a></li>
+            <li><a href="evenements.html">Évenements</a></li>
             <li><a href="bureau-provisoire.html">Bureau Provisoire</a></li>
             <li><a href="contact.html">Contact</a></li>
-
-            <!-- Section pour S'inscrire et Se connecter -->
-            <ul class="auth-links">
-                <li><a href="signin.html">S'inscrire</a></li>
-                <li><a href="login.html">Se connecter</a></li>
-            </ul>
+            <li id="auth-links">
+                <a href="signin.html" id="signin">S'inscrire</a>
+            </li>
+            <li id="auth-links">
+                <a href="login.html" id="login">Se connecter</a>
+            </li>
+            <li id="profile-link" style="display: none;">
+                <a href="profile.html">Profil</a>
+            </li>
         </ul>
     </nav>
+    
 
+    <!-- Hero Section -->
     <header>
         <div>
             <h1>Nos Evenements</h1>
-            <p>Inscrivez vous à nos évenements pour discuter, débattre, vous exprimer avec nous !</p>
+            <p>Inscrivez-vous à nos événements pour discuter, débattre, vous exprimer avec nous !</p>
         </div>
     </header>
 
+    <!-- Section Événements -->
     <section id="evenements">
         <h2>Événements à venir</h2>
         <div class="event-container">
             <!-- Événement 1 -->
             <div class="event">
-                <h3>Débat sur la politique actuelle</h3>
-                <p class="event-date">15 janvier 2024</p>
-                <p class="event-description">Un débat passionnant sur les grandes questions politiques du moment, avec des invités spécialisés.</p>
-                <a href="evenement-detail.html" class="btn-event">Voir plus</a>
-                <a href="inscription-evenement.html" class="btn-inscription">S'inscrire à l'événement</a>
-            </div>
-            <!-- Événement 2 -->
-            <div class="event">
-                <h3>Atelier sur la désinformation</h3>
-                <p class="event-date">22 janvier 2024</p>
-                <p class="event-description">Un atelier pratique pour comprendre les mécanismes de la désinformation et apprendre à mieux l'identifier.</p>
-                <a href="evenement-detail.html" class="btn-event">Voir plus</a>
-                <a href="inscription-evenement.html" class="btn-inscription">S'inscrire à l'événement</a>
-            </div>
-            <!-- Événement 3 -->
-            <div class="event">
-                <h3>Conférence sur la philosophie moderne</h3>
+                <h3>Conférence sur la Philosophie Moderne</h3>
                 <p class="event-date">29 janvier 2024</p>
-                <p class="event-description">Une conférence sur les courants de pensée en philosophie moderne, avec un focus sur les enjeux actuels.</p>
-                <a href="evenement-detail.html" class="btn-event">Voir plus</a>
-                <a href="inscription-evenement.html" class="btn-inscription">S'inscrire à l'événement</a>
+                <p class="event-description">
+                    Rejoignez-nous pour une conférence captivante sur les grands courants de la philosophie moderne. 
+                    Découvrez les idées des philosophes influents du XXe et XXIe siècle, avec un focus particulier sur les enjeux contemporains.
+                </p>
+                <p class="event-description">
+                    Le Dr. Jean Dupont, expert en philosophie contemporaine, animera cette session. Il abordera des thèmes comme l'existentialisme, la phénoménologie, et la déconstruction.
+                </p>
+                <a href="#" class="btn-event" data-title="Conférence sur la Philosophie Moderne" 
+                data-date="29 janvier 2024" 
+                data-description="Rejoignez-nous pour une conférence approfondie sur la philosophie moderne. Nous explorerons les théories influentes qui façonnent la pensée contemporaine, y compris l'existentialisme, la phénoménologie, et la déconstruction. La conférence sera animée par le Dr. Jean Dupont, spécialiste de la philosophie contemporaine. Ne manquez pas cette occasion de discuter des enjeux philosophiques actuels avec des experts dans le domaine.">
+                    Voir plus
+                </a>
+                <a href="event-signin.html" class="btn-inscription">S'inscrire à l'événement</a>
             </div>
+            
         </div>
     </section>
 
+    <!-- Boîte Modale -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-modal">&times;</span>
+            <h3 id="modal-title">Titre de l'Événement</h3>
+            <p id="modal-date">Date : </p>
+            <p id="modal-description">Description de l'événement...</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <p>&copy 2024 OGMA - Tous droits réservés</p>
+            <p>&copy; 2024 OGMA - Tous droits réservés</p>
             <div class="social-links">
                 <a href="https://instagram.com/ogma_asso" target="_blank">Instagram</a>
             </div>
         </div>
     </footer>
 
+    <!-- Script pour la Boîte Modale -->
+    <script>
+        // Récupération des éléments
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDate = document.getElementById('modal-date');
+        const modalDescription = document.getElementById('modal-description');
+        const closeModal = document.getElementById('close-modal');
+        const btnEvents = document.querySelectorAll('.btn-event');
+
+        // Afficher la modale avec les infos dynamiques
+        btnEvents.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const title = button.getAttribute('data-title');
+                const date = button.getAttribute('data-date');
+                const description = button.getAttribute('data-description');
+
+                modalTitle.textContent = title;
+                modalDate.textContent = "Date : " + date;
+                modalDescription.textContent = description;
+
+                modal.style.display = 'flex';
+            });
+        });
+
+        // Fermer la modale
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+
+        // Écouteur pour afficher/masquer le menu
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+    </script>
 </body>
 </html>

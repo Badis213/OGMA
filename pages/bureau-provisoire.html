@@ -5,21 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Le bureau provisoire de l'association OGMA">
     <title>Bureau Provisoire - OGMA</title>
-    <link rel="stylesheet" href="../Assets/css/style-bureau.css">
+    <link rel="stylesheet" href="Assets/css/style-bureau.css">
 </head>
 <body>
-    <!-- Navbar -->
     <nav class="navbar">
         <div class="logo">OGMA</div>
-        <ul class="nav-links">
+        <!-- Bouton hamburger -->
+        <div class="hamburger" id="hamburger">
+            &#9776; <!-- Symbole hamburger -->
+        </div>
+        <ul class="nav-links" id="nav-links">
             <li><a href="index.html">Accueil</a></li>
-            <li><a href="evenements.html">Événements</a></li>
+            <li><a href="evenements.html">Évenements</a></li>
             <li><a href="bureau-provisoire.html">Bureau Provisoire</a></li>
             <li><a href="contact.html">Contact</a></li>
-            <ul class="auth-links">
-                <li><a href="signin.html">S'inscrire</a></li>
-                <li><a href="login.html">Se connecter</a></li>
-            </ul>
+            <li id="auth-links">
+                <a href="signin.html" id="signin">S'inscrire</a>
+            </li>
+            <li id="auth-links">
+                <a href="login.html" id="login">Se connecter</a>
+            </li>
+            <li id="profile-link" style="display: none;">
+                <a href="profile.html">Profil</a>
+            </li>
         </ul>
     </nav>
 
@@ -121,6 +129,6 @@
             </div>
         </div>
     </footer>
-
+    <script src="Assets/js/script.js"></script>
 </body>
 </html>
