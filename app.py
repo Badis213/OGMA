@@ -17,6 +17,8 @@ CORS(app)
 load_dotenv()
 
 db_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'instance/ogma.db')
+if not os.path.exists(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'instance')):
+    os.makedirs(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'instance'))
 
 # Now you can access the environment variables
 app.config['SECRET_KEY'] = os.getenv('FLASK_SECRET_KEY')
@@ -75,10 +77,10 @@ class ContactMessage(db.Model):
         return f"<Message {self.id} from {self.name}>"
 
 
-
-# Créer la base de données
-with app.app_context():
-    db.create_all()  # Créer les tables si elles n'existent pas déjà
+# Create the database file if it doesn't exist
+if not os.path.exists(db_path):
+    with app.app_context():
+        db.create_all()  # This will create the tables based on your models
 
 
 # Permission lists
