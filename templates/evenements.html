@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Événements organisés par l'Association OGMA">
+    <title>Événements - OGMA</title>
+    <link rel="stylesheet" href="../static/css/style-evenements.css"> <!-- Lien vers le CSS spécifique de la page Événements -->
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">OGMA</div>
+        <!-- Bouton hamburger -->
+        <div class="hamburger" id="hamburger">
+            &#9776; <!-- Symbole hamburger -->
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="{{ url_for('index') }}">Accueil</a></li>
+            <li><a href="{{ url_for('evenements') }}">Événements</a></li>
+            <li><a href="{{ url_for('bureau_provisoire') }}">Bureau Provisoire</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+
+            <!-- Display these links only if the user is NOT logged in -->
+            {% if 'user_id' not in session %}
+            <li id="auth-links">
+                <a href="{{ url_for('signin') }}" id="signin">S'inscrire</a>
+            </li>
+            <li id="auth-links">
+                <a href="{{ url_for('login') }}" id="login">Se connecter</a>
+            </li>
+            {% endif %}
+
+            <!-- Display these links only if the user IS logged in -->
+            {% if 'user_id' in session %}
+            <li id="profile-link">
+                <a href="{{ url_for('profil') }}">Profil</a>
+            </li>
+            <li id="logout-link">
+                <a href="{{ url_for('logout') }}" id="logout">Se déconnecter</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    
+
+    <!-- Hero Section -->
+    <header>
+        <div>
+            <h1>Nos Evenements</h1>
+            <p>Inscrivez-vous à nos événements pour discuter, débattre, vous exprimer avec nous !</p>
+        </div>
+    </header>
+
+    <!-- Section Événements -->
+    <section id="evenements">
+        <h2>Événements à venir</h2>
+        <div class="event-container">
+            <!-- Exemple d'événement -->
+            <div class="event">
+                <h3>Conférence sur la Philosophie Moderne</h3>
+                <p class="event-date">29 janvier 2024</p>
+                <p class="event-description">
+                    Rejoignez-nous pour une conférence captivante sur les grands courants de la philosophie moderne. 
+                    Découvrez les idées des philosophes influents du XXe et XXIe siècle, avec un focus particulier sur les enjeux contemporains.
+                </p>
+                <a href="#" class="btn-event" data-title="Conférence sur la Philosophie Moderne" 
+                   data-date="29 janvier 2024" 
+                   data-description="Rejoignez-nous pour une conférence approfondie sur la philosophie moderne. Nous explorerons les théories influentes qui façonnent la pensée contemporaine, y compris l'existentialisme, la phénoménologie, et la déconstruction. La conférence sera animée par le Dr. Jean Dupont, spécialiste de la philosophie contemporaine. Ne manquez pas cette occasion de discuter des enjeux philosophiques actuels avec des experts dans le domaine.">
+                    Voir plus
+                </a>
+                <a href="{{ url_for('event_signin') }}" class="btn-inscription" id="inscription-btn">S'inscrire à l'événement</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Boîte Modale -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-modal">&times;</span>
+            <h3 id="modal-title">Titre de l'Événement</h3>
+            <p id="modal-date">Date : </p>
+            <p id="modal-description">Description de l'événement...</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 OGMA - Tous droits réservés</p>
+            <div class="social-links">
+                <a href="https://instagram.com/ogma_asso" target="_blank">Instagram</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Récupération des éléments
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDate = document.getElementById('modal-date');
+        const modalDescription = document.getElementById('modal-description');
+        const closeModal = document.getElementById('close-modal');
+        const btnEvents = document.querySelectorAll('.btn-event');
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+
+        // Afficher la modale avec les infos dynamiques
+        btnEvents.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const title = button.getAttribute('data-title');
+                const date = button.getAttribute('data-date');
+                const description = button.getAttribute('data-description');
+
+                modalTitle.textContent = title;
+                modalDate.textContent = "Date : " + date;
+                modalDescription.textContent = description;
+
+                modal.style.display = 'flex';
+            });
+        });
+
+        // Fermer la modale
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Menu hamburger
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

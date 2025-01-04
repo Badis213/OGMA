@@ -1,0 +1,13 @@
+Copyright (c) 2024 OGMA
+
+Par la présente, vous êtes autorisé à utiliser ce logiciel à des fins personnelles et professionnelles sous les conditions suivantes :
+
+1. **Droits de modification** : Vous n'êtes pas autorisé à modifier, redistribuer, ou créer des œuvres dérivées de ce logiciel sans mon autorisation expresse. Toute modification du code source doit être demandée par écrit.
+   
+2. **Utilisation commerciale** : Toute utilisation commerciale nécessitera une autorisation préalable. Vous ne pouvez pas vendre ce logiciel en tant que produit indépendant.
+
+3. **Redistribution** : Vous ne pouvez pas redistribuer ce logiciel sous aucune forme (y compris la redistribution de parties de celui-ci), que ce soit à titre gratuit ou payant, sans ma permission explicite.
+
+4. **Droits réservés** : Je me réserve le droit de modifier ou de retirer cette licence à tout moment et pour toute raison.
+
+Pour toute demande d'autorisation ou pour toute question, veuillez me contacter à bazizbadis13@gmail.com

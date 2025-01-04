@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Profil utilisateur de l'association OGMA">
+    <title>Profil - OGMA</title>
+    <link rel="stylesheet" href="../static/css/style-profil.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">OGMA</div>
+        <!-- Bouton hamburger -->
+        <div class="hamburger" id="hamburger">
+            &#9776; <!-- Symbole hamburger -->
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="{{ url_for('index') }}">Accueil</a></li>
+            <li><a href="{{ url_for('evenements') }}">Événements</a></li>
+            <li><a href="{{ url_for('bureau_provisoire') }}">Bureau Provisoire</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            <li id="logout-link">
+                <a href="{{ url_for('logout')}}" id="logout">Se déconnecter</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Profil Section -->
+    <section class="profile-section">
+        <h2>Mon Profil</h2>
+
+        <div class="profile-info">
+            <p><strong>Nom:</strong> {{ user.nom }}</p>
+            <p><strong>Prénom:</strong> {{ user.prenom }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Rôle:</strong> {{ user.role }}</p>
+            <p><strong>Date de création:</strong> {{ user.created_at }}</p>
+            <p><strong>Vérifié:</strong> {% if user.is_verified %} Oui {% else %} Non {% endif %}</p>
+        </div>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 OGMA - Tous droits réservés</p>
+        </div>
+    </footer>
+
+    <script src="../static/js/hamburger.js"></script>
+ 
+</body>
+</html>

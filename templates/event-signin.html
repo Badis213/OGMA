@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Association OGMA : Développer l'esprit critique et lutter contre la désinformation">
+    <title>OGMA - Inscription à un événement</title>
+    <link rel="stylesheet" href="../static/css/style-eventsingin.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">OGMA</div>
+        <div class="hamburger" id="hamburger">
+            &#9776;
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="{{ url_for('index') }}">Accueil</a></li>
+            <li><a href="{{ url_for('evenements') }}">Événements</a></li>
+            <li><a href="{{ url_for('bureau_provisoire') }}">Bureau Provisoire</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            <li id="profile-link">
+                <a href="{{ url_for('profil') }}">Profil</a>
+            </li>
+            <li id="logout-link">
+                <a href="{{ url_for('logout') }}" id="logout">Se déconnecter</a>
+            </li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>Inscription à un événement</h1>
+    </header>
+
+    <section id="event-signin">
+        <form method="POST" action="{{ url_for('event_signin') }}">
+            <div>
+                <label for="prenom">Prénom :</label>
+                <input type="text" id="prenom" name="prenom" value="{{ user.prenom }}" disabled>
+            </div>
+
+            <div>
+                <label for="nom">Nom :</label>
+                <input type="text" id="nom" name="nom" value="{{ user.nom }}" disabled>
+            </div>
+
+            <div>
+                <label for="email">Email :</label>
+                <input type="email" id="email" name="email" value="{{ user.email }}" disabled>
+            </div>
+            <div>
+                <label for="classe">Classe :</label>
+                <input type="text" id="classe" name="classe" required>
+            </div>
+
+            <div>
+                <label for="mode">Mode de participation :</label>
+                <select id="mode" name="mode" required>
+                    <option value="présentiel">Présentiel</option>
+                    <option value="distanciel">Distanciel</option>
+                </select>
+            </div>
+
+            <!-- Certification -->
+            <div>
+                <label for="confirmation">Je certifie être là le {{ event_date }} à {{ event_time }} au lieu : {{ event_place }}</label>
+                <input type="checkbox" id="confirmation" name="confirmation" required>
+            </div>
+            
+
+            <button type="submit">S'inscrire à l'événement</button>
+        </form>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy 2024 OGMA - Tous droits réservés</p>
+        </div>
+    </footer>
+
+    <script src="../static/js/hamburger.js"></script>
+</body>
+</html>

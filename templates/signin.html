@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S'inscrire - OGMA</title>
+    <link rel="stylesheet" href="../static/css/style-auth.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">OGMA</div>
+        <div class="hamburger" id="hamburger">&#9776;</div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="{{ url_for('index') }}">Accueil</a></li>
+            <li><a href="{{ url_for('evenements') }}">Événements</a></li>
+            <li><a href="{{ url_for('bureau_provisoire') }}">Bureau Provisoire</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            <li id="auth-links"><a href="{{ url_for('login') }}" id="login">Se connecter</a></li>
+        </ul>
+    </nav>
+
+    <!-- Section d'inscription -->
+    <section class="auth-section">
+        <h2>S'inscrire</h2>
+        <form method="POST" id="signup-form">
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+
+            <label for="prenom">Prénom</label>
+            <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Votre email" required>
+
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="password" placeholder="Votre mot de passe" required>
+
+            <label for="confirm-password">Confirmer le mot de passe</label>
+            <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirmez votre mot de passe" required>
+
+            <button type="submit" id="signup-button">S'inscrire</button>
+        </form>
+
+        <p>Déjà inscrit ? <a href="{{ url_for('login') }}">Se connecter ici</a></p>
+
+        <!-- Display Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flashes">
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </section>
+
+    <script src="../static/js/hamburger.js"></script>
+
+</body>
+</html>

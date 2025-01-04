@@ -1,0 +1,36 @@
+# Python bytecode files
+*.pyc
+*.pyo
+__pycache__
+
+# Virtual environment
+venv/
+ENV/
+env/
+.venv/
+
+# Flask instance folder
+instance/
+
+# Flask settings
+*.sqlite
+*.db
+*.log
+
+# dotenv environment variables file
+.env
+
+# pyenv
+.python-version
+
+# IDE/editor folders
+.vscode/
+.idea/
+*.swp
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*~

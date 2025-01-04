@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Le bureau provisoire de l'association OGMA">
+    <title>Bureau Provisoire - OGMA</title>
+    <link rel="stylesheet" href="../static/css/style-bureau.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">OGMA</div>
+        <!-- Bouton hamburger -->
+        <div class="hamburger" id="hamburger">
+            &#9776; <!-- Symbole hamburger -->
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="{{ url_for('index') }}">Accueil</a></li>
+            <li><a href="{{ url_for('evenements') }}">Événements</a></li>
+            <li><a href="{{ url_for('bureau_provisoire') }}">Bureau Provisoire</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+
+            <!-- Display these links only if the user is NOT logged in -->
+            {% if 'user_id' not in session %}
+            <li id="auth-links">
+                <a href="{{ url_for('signin') }}" id="signin">S'inscrire</a>
+            </li>
+            <li id="auth-links">
+                <a href="{{ url_for('login') }}" id="login">Se connecter</a>
+            </li>
+            {% endif %}
+
+            <!-- Display these links only if the user IS logged in -->
+            {% if 'user_id' in session %}
+            <li id="profile-link">
+                <a href="{{ url_for('profil') }}">Profil</a>
+            </li>
+            <li id="logout-link">
+                <a href="{{ url_for('logout') }}" id="logout">Se déconnecter</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <!-- Section du Bureau Provisoire -->
+    <header>
+        <div>
+            <h1>Bureau Provisoire</h1>
+            <p>Rencontrez les membres du bureau provisoire de l'association OGMA</p>
+        </div>
+    </header>
+
+    <section id="bureau-provisoire">
+        <h2>Les Membres du Bureau</h2>
+        <div class="members-container">
+            <!-- Présentation du Président -->
+            <div class="member">
+                <div class="member-photo">
+                    <img src="../static/img/portraits/portrait-bureau-robin.png" alt="Photo du Président">
+                </div>
+                <div class="member-info">
+                    <h3>Président</h3>
+                    <p>COLOMBIE Robin</p>
+                </div>
+            </div>
+
+            <!-- Présentation du Vice-Président -->
+            <div class="member">
+                <div class="member-photo">
+                    <img src="../static/img/portraits/portrait-bureau-nassym.png" alt="Photo du Vice-Président">
+                </div>
+                <div class="member-info">
+                    <h3>Vice-Président</h3>
+                    <p>NAFATI Nassym</p>
+                </div>
+            </div>
+
+            <!-- Présentation du Trésorier -->
+            <div class="member">
+                <div class="member-photo">
+                    <img src="../static/img/portraits/portrait-bureau-jr.png" alt="Photo du Trésorier">
+                </div>
+                <div class="member-info">
+                    <h3>Trésorier</h3>
+                    <p>CADIOT Jean-Rayan</p>
+                </div>
+            </div>
+
+            <!-- Présentation du Secrétaire -->
+            <div class="member">
+                <div class="member-photo">
+                    <img src="../static/img/portraits/portrait-bureau-ambre.png" alt="Photo du Secrétaire">
+                </div>
+                <div class="member-info">
+                    <h3>Secrétaire Photographe</h3>
+                    <p>DE ROYER DUPRE Ambre</p>
+                </div>
+            </div>
+
+            <!-- Présentation du Porte-Parole -->
+            <div class="member">
+                <div class="member-photo">
+                    <img src="../static/img/portraits/portrait-bureau-elyan.png" alt="Photo du Porte-Parole">
+                </div>
+                <div class="member-info">
+                    <h3>Secrétaire Porte-Parole</h3>
+                    <p>HUC Elyan</p>
+                </div>
+            </div>
+
+            <!-- Présentation du Secrétaire Chargé de Communication -->
+            <div class="member">
+                <div class="member-photo">
+                    <img src="../static/img/portraits/photo-bureau-badis.jpg" alt="Photo du Secrétaire Chargé de Communication">
+                </div>
+                <div class="member-info">
+                    <h3>Secrétaire Chargé de Communication</h3>
+                    <p>BAZIZ Badis</p>
+                </div>
+            </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 OGMA - Tous droits réservés</p>
+            <div class="social-links">
+                <a href="https://instagram.com/ogma_asso" target="_blank">Instagram</a>
+            </div>
+        </div>
+    </footer>
+    <script src="../static/js/hamburger.js"></script>
+</body>
+</html>

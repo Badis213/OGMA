@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panneau Admin</title>
+    <link rel="stylesheet" href="../static/css/style-admin.css">
+</head>
+<body>
+
+<div class="container">
+    <!-- Panel Header -->
+    <div class="panel-header">
+        <h2>Panneau d'Administration</h2>
+        <p class="lead">Gérer les membres, événements et statistiques de l'association</p>
+    </div>
+
+    <!-- Gestion des Membres -->
+    <div class="panel-section">
+        <div class="card">
+            <div class="card-header">
+                <h3>Gestion des Membres</h3>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Rôle</th>
+                            <th>Vérification</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr>
+                            <td>{{ user.nom }} {{ user.prenom }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.role }}</td>
+                            <td>{{ 'Oui' if user.is_verified else 'Non' }}</td>
+                            <td>
+                                {% if logged_in_user.role == "président" %}
+                                    <!-- Toggle Verification (Only accessible by president) -->
+                                    <form method="POST" action="{{ url_for('toggle_verification', user_id=user.id) }}">
+                                        <button type="submit" class="modify">
+                                            {{ 'Vérifier' if not user.is_verified else 'Désactiver' }}
+                                        </button>
+                                    </form>
+                                {% endif %}
+
+                                {% if logged_in_user.role in ["président", "vice-président"] %}
+                                    <!-- Modify Role (Only accessible by president or vice-président) -->
+                                    <form method="POST" action="{{ url_for('change_role', user_id=user.id) }}">
+                                        <select name="role">
+                                            <option value="secrétaire" {% if user.role == "secrétaire" %}selected{% endif %}>Secrétaire</option>
+                                            <option value="trésorier" {% if user.role == "trésorier" %}selected{% endif %}>Trésorier</option>
+                                            <option value="chargé-de-communication" {% if user.role == "chargé-de-communication" %}selected{% endif %}>Chargé de Communication</option>
+                                            <option value="porte-parole" {% if user.role == "porte-parole" %}selected{% endif %}>Porte-parole</option>
+                                            <option value="membre" {% if user.role == "membre" %}selected{% endif %}>Membre</option>
+                                        </select>
+                                        <button type="submit" class="modify">Changer rôle</button>
+                                    </form>
+
+                                    <!-- Delete Account (Only accessible by president or vice-président) -->
+                                    <form method="POST" action="{{ url_for('delete_account', user_id=user.id) }}">
+                                        <button type="submit" class="delete">Supprimer</button>
+                                    </form>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gestion des Inscriptions aux Événements -->
+    <div class="panel-section">
+        <div class="card">
+            <div class="card-header">
+                <h3>Gestion des Inscriptions aux Événements</h3>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Statut</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for registration in event_registrations %}
+                        <tr>
+                            <td>{{ registration.prenom }} {{ registration.nom }}</td>
+                            <td>{{ registration.email }}</td>
+                            <td>{{ registration.status }}</td>
+                            <td>
+                                {% if logged_in_user.role in ["président", "admin"] %}
+                                    <!-- Update Status (Only accessible by president or admin) -->
+                                    <form method="POST" action="{{ url_for('update_status', registration_id=registration.id) }}">
+                                        <select name="status">
+                                            <option value="attente" {% if registration.status == 'attente' %}selected{% endif %}>Attente</option>
+                                            <option value="Validé" {% if registration.status == 'Validé' %}selected{% endif %}>Validé</option>
+                                            <option value="Refusé" {% if registration.status == 'Refusé' %}selected{% endif %}>Refusé</option>
+                                        </select>
+                                        <button type="submit" class="modify">Mettre à jour</button>
+                                    </form>
+                                    <!-- Clear Registrations Button (Only accessible by president) -->
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        
+                    </tbody>
+                </table>
+                {% if logged_in_user.role in ["président", "admin", "secrétaire", "vice-président"] %}            
+                <form method="POST" action="{{ url_for('clear_event_registrations') }}">
+                    <button type="submit" class="delete">Effacer les inscriptions passées</button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Gestion des Messages -->
+    <div class="panel-section">
+        <div class="card">
+            <div class="card-header">
+                <h3>Gestion des Messages</h3>
+            </div>
+            <div class="card-body">
+                {% if messages %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Message</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for message in messages %}
+                        <tr>
+                            <td>{{ message.name }}</td>
+                            <td>{{ message.email }}</td>
+                            <td>{{ message.content }}</td>
+                            <td>{{ message.created_at.strftime('%d/%m/%Y %H:%M') }}</td>
+                            <td>
+                                <form method="POST" action="{{ url_for('delete_message', message_id=message.id) }}">
+                                    <button type="submit" class="delete">Supprimer</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <p>Aucun message pour le moment.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    
+
+    <!-- Statistiques -->
+    <div class="panel-section">
+        <div class="card">
+            <div class="card-header">
+                <h3>Statistiques</h3>
+            </div>
+            <div class="card-body">
+                <ul class="list">
+                    <li>Nombre total de membres : <strong>{{ total_members }}</strong></li>
+                    <li>Nombre de membres vérifiés : <strong>{{ verified_members }}</strong></li>
+                    <li>Nombre de membres non vérifiés : <strong>{{ non_verified_members }}</strong></li>
+                    <li>Nombre de membres inscrits à l'événement : <strong>{{ event_signed_up }}</strong></li>
+                    <li>Nombre de membres en attente : <strong>{{ attente_count }}</strong></li>
+                    <li>Nombre de membres en Présentiel : <strong>{{ presencial_count }}</strong></li>
+                    <li>Nombre de membres en Distanciel : <strong>{{ distanciel_count }}</strong></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

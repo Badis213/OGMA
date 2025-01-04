@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Association OGMA : Développer l'esprit critique et lutter contre la désinformation">
+    <title>OGMA - Association des lycéens</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">OGMA</div>
+        <!-- Bouton hamburger -->
+        <div class="hamburger" id="hamburger">
+            &#9776; <!-- Symbole hamburger -->
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="{{ url_for('index') }}">Accueil</a></li>
+            <li><a href="{{ url_for('evenements') }}">Événements</a></li>
+            <li><a href="{{ url_for('bureau_provisoire') }}">Bureau Provisoire</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+
+            <!-- Display these links only if the user is NOT logged in -->
+            {% if 'user_id' not in session %}
+            <li id="auth-links">
+                <a href="{{ url_for('signin') }}" id="signin">S'inscrire</a>
+            </li>
+            <li id="auth-links">
+                <a href="{{ url_for('login') }}" id="login">Se connecter</a>
+            </li>
+            {% endif %}
+
+            <!-- Display these links only if the user IS logged in -->
+            {% if 'user_id' in session %}
+            <li id="profile-link">
+                <a href="{{ url_for('profil') }}">Profil</a>
+            </li>
+            <li id="logout-link">
+                <a href="{{ url_for('logout') }}" id="logout">Se déconnecter</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    
+    
+
+    <!-- Bandeau principal -->
+    <header>
+        <div>
+            <h1>OGMA</h1>
+            <p>"Écoute les autres, même celui que tu considères moins intelligent que toi, car lui aussi a quelque chose à t'apprendre."<br>- Max Ehrmann</p>
+            <a href="#a-propos" class="btn-apropos">En savoir plus</a>
+        </div>
+    </header>
+
+    <!-- Section Présentation -->
+    <section id="a-propos">
+        <h2>A propos</h2>
+        <div class="content">
+            <p><b>OGMA</b> est une association de lycéens engagés. Notre objectif principal est de débattre, discuter et échanger sur des questions de sociétés, de politique, de philosophie, de littérature et autre. Nous souhaitons, ensemble, permettre à tous de développer leur esprit critique, lutter contre la désinformation. À travers des discussions ouvertes et constructives, nous voulons offrir un espace où chacun peut échanger librement sur des sujets divers et variés, ou écouter l'argumentaire des autres, se forger un opinion et se cultiver.</p>
+            <p>Dans un monde en constante évolution, où les informations circulent rapidement et parfois de manière biaisée, il est essentiel de prendre du recul, de réfléchir et de discuter des grands enjeux qui façonnent notre société. OGMA se positionne comme un lieu de réflexion et de débat, où chacun peut enrichir ses connaissances et affiner ses arguments sur des sujets d'actualité ou des questions plus intemporelles.</p>
+            <p>Nous croyons fermement que la diversité des opinions et des idées est un moteur de progrès. C'est pourquoi nous encourageons nos membres à proposer des thèmes de discussion, à participer activement aux débats et à remettre en question les certitudes. En luttant contre la désinformation, nous visons à créer une communauté plus informée et plus consciente des enjeux du monde qui l'entoure.</p>
+        </div>
+        <div class="image-container">
+            <img src="../static/img/img_debat.JPG" alt="Débat" class="image-presentation">
+            <img src="../static/img/img_fiche.JPG" alt="Fiche" class="image-presentation">
+        </div>
+
+    <div class="event-registration">
+        <button class="btn-inscription" onclick="window.location.href='/evenements'">S'inscrire à un événement</button>
+    </div>
+
+        <hr class="separation">        
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy 2024 OGMA - Tous droits réservés</p>
+            <div class="social-links">
+                <a href="https://instagram.com/ogma_asso" target="_blank">Instagram</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../static/js/hamburger.js"></script>
+    <script>
+    </script>
+</body>
+</html>

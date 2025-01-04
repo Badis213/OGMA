@@ -1,0 +1,240 @@
+@font-face {
+    font-family: 'LOT';
+    src: url('../fonts/LOT.otf') format('truetype');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Global styles for body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: white;
+    line-height: 1.6;
+    padding-top: 40px;
+}
+
+
+/* Navbar container */
+.navbar {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    background-color: #111; /* Fond sombre pour la navbar */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Logo */
+.navbar .logo {
+    font-size: 24px;
+    font-family: 'LOT';
+    color: white;
+}
+
+/* Navbar Links */
+.nav-links {
+    display: flex; /* Affichage horizontal pour les grands écrans */
+    list-style: none;
+    margin-left: auto; /* Aligner les liens à droite */
+    gap: 20px; /* Espacement uniforme entre les éléments */
+}
+
+.nav-links li {
+    margin: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+    font-size: 14px;
+    padding: 5px 10px;
+}
+
+.nav-links a:hover {
+    color: #a7a7a7;
+    background-color: rgba(255, 255, 255, 0.1); /* léger fond sur hover */
+    border-radius: 5px;
+}
+
+/* Liens de connexion et d'inscription à droite */
+#auth-links {
+    display: flex;
+    gap: 20px;
+}
+
+#auth-links a {
+    font-size: 14px;
+    padding: 5px 15px;
+    border-radius: 30px; /* Bord arrondi pour un effet moderne */
+    background-color: #444; /* Fond de l'arrière-plan */
+    transition: background-color 0.3s ease;
+}
+
+#auth-links a:hover {
+    background-color: #666; /* Fond plus clair au survol */
+}
+
+/* Profil */
+#profile-link a {
+    font-size: 14px;
+    padding: 5px 15px;
+    border-radius: 30px;
+    background-color: #444;
+    transition: background-color 0.3s ease;
+}
+
+#profile-link a:hover {
+    background-color: #666;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 15px 20px;
+    }
+
+    .nav-links {
+        display: none; /* Masquer les liens sur petits écrans */
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 100%;
+        background-color: #111;
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .nav-links.active {
+        display: flex; /* Afficher les liens quand ils sont actifs */
+    }
+
+    .nav-links li {
+        margin-bottom: 20px; /* Espacement vertical entre les éléments */
+    }
+
+    #auth-links {
+        display: none; /* Cacher les liens d'inscription et connexion sur mobile */
+    }
+}
+
+/* Section d'authentification */
+.auth-section {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    background-color: #222;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.auth-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.auth-section form {
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-section input {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background-color: #333;
+    color: white;
+}
+
+.auth-section button {
+    padding: 10px;
+    background-color: #444;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.auth-section button:hover {
+    background-color: #555;
+}
+
+.auth-section p {
+    text-align: center;
+}
+
+.auth-section a {
+    color: #a7a7a7;
+    text-decoration: none;
+}
+
+.auth-section a:hover {
+    color: white;
+}
+
+/* Profil */
+.profile-section {
+    margin-top: 80px;
+    padding: 20px;
+    text-align: center;
+}
+
+.profile-section button {
+    background-color: #444;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.profile-section button:hover {
+    background-color: #555;
+}
+
+/* Example for flashes.css */
+.flashes {
+    list-style-type: none;
+    padding: 0;
+}
+
+.flashes li {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.flashes .success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.flashes .danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+@media (max-width: 1000px) {
+    #auth-links {
+        display: block; /* Show the links on mobile when the menu is active */
+        gap: 20px;
+        text-align: center;
+    }
+}

@@ -1,0 +1,185 @@
+/* General Reset and Basic Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Custom Font */
+@font-face {
+    font-family: 'LOT';
+    src: url('../fonts/LOT.otf') format('truetype');
+}
+
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: white;
+    line-height: 1.6;
+}
+
+.container {
+    padding: 60px 40px;
+    background-color: #111;
+}
+
+/* Panel Header */
+.panel-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.panel-header h2 {
+    font-size: 32px;
+    font-family: 'LOT', sans-serif;
+    color: #28a745; /* Green for header */
+}
+
+.panel-header .lead {
+    font-size: 18px;
+    color: #aaa;
+}
+
+/* Panel Section */
+.panel-section {
+    margin-bottom: 40px;
+}
+
+/* Card Component */
+.card {
+    background-color: #222;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.card-header {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px 10px 0 0;
+}
+
+.card-header h3 {
+    font-size: 24px;
+    color: #28a745; /* Green for card headers */
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* Table */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table thead {
+    background-color: #333;
+}
+
+.table th,
+.table td {
+    padding: 12px 20px;
+    border: 1px solid #444;
+    text-align: left;
+}
+
+.table th {
+    font-size: 16px;
+    color: #28a745; /* Green for table headers */
+}
+
+.table td {
+    color: #ccc;
+}
+
+.table tr:nth-child(even) {
+    background-color: #2a2a2a;
+}
+
+.table tr:hover {
+    background-color: #333;
+}
+
+/* Modify button */
+button.modify {
+    background-color: #28a745; /* Green for modification buttons */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.modify:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+/* Delete button */
+button.delete {
+    background-color: #dc3545; /* Red for delete buttons */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.delete:hover {
+    background-color: #c82333; /* Darker red on hover */
+}
+
+/* Select Dropdown */
+select {
+    background-color: #333;
+    color: white;
+    border: 1px solid #444;
+    padding: 8px 12px;
+    border-radius: 5px;
+    width: auto;
+}
+
+/* Statistics List */
+.list {
+    list-style-type: none;
+    padding: 0;
+    font-size: 16px;
+    color: #ccc;
+}
+
+.list li {
+    margin-bottom: 10px;
+}
+
+.list strong {
+    color: #28a745;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .container {
+        padding: 30px 20px;
+    }
+
+    .panel-header h2 {
+        font-size: 28px;
+    }
+
+    .panel-header .lead {
+        font-size: 16px;
+    }
+
+    .card-header h3 {
+        font-size: 20px;
+    }
+
+    .table th,
+    .table td {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
