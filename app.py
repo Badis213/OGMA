@@ -16,14 +16,10 @@ CORS(app)
 
 load_dotenv()
 
-db_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'instance/ogma.db')
-if not os.path.exists(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'instance')):
-    os.makedirs(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'instance'))
-
 # Now you can access the environment variables
 app.config['SECRET_KEY'] = os.getenv('FLASK_SECRET_KEY')
 app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
-app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{db_path}"
+app.config['SQLALCHEMY_DATABASE_URI'] = f"{os.getenv('DB_URL')}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # To disable a feature that uses memory for tracking
 
 # Initialisation des extensions
@@ -464,6 +460,84 @@ def delete_message(message_id):
     flash("Message supprimé avec succès.", 'success')
     return redirect(url_for('admin_panel'))
 
+@app.route('/db-panel')
+def db_panel():
+    if not is_logged_in():  # Use is_logged_in() to check if the user is logged in
+        flash('Vous devez être connecté pour accéder à cette page.', 'danger')
+        return redirect(url_for('login'))
+
+    # Get the user from the session
+    user = User.query.get(session['user_id'])
+    if user.email != 'bazizbadis13@gmail.com':  # Ensure the email is the one you specified
+        flash('Accès non autorisé.', 'danger')
+        return redirect(url_for('index'))
+
+    # Query all users for the database panel
+    users = User.query.all()
+    return render_template('db_panel.html', users=users)
+
+
+# Route to delete a user from the database (for the db-panel)
+@app.route('/db-panel/delete-user/<int:user_id>', methods=['POST'])
+def delete_user_from_db(user_id):
+    if not is_logged_in():  # Use is_logged_in() to check if the user is logged in
+        flash('Vous devez être connecté pour effectuer cette action.', 'danger')
+        return redirect(url_for('login'))
+
+    # Get the user from the session
+    user = User.query.get(session['user_id'])
+    if user.email != 'bazizbadis13@gmail.com':  # Ensure the email is the one you specified
+        flash('Accès non autorisé.', 'danger')
+        return redirect(url_for('index'))
+
+    # Find the user to delete
+    user_to_delete = User.query.get(user_id)
+    if not user_to_delete:
+        flash('Utilisateur non trouvé.', 'danger')
+        return redirect(url_for('db_panel'))
+
+    # Delete the user from the database
+    db.session.delete(user_to_delete)
+    db.session.commit()
+
+    flash(f"Utilisateur {user_to_delete.nom} supprimé avec succès.", 'success')
+    return redirect(url_for('db_panel'))
+
+
+# Route to modify a user (for the db-panel)
+@app.route('/db-panel/modify-user/<int:user_id>', methods=['GET', 'POST'])
+def modify_user_in_db(user_id):
+    if not is_logged_in():  # Use is_logged_in() to check if the user is logged in
+        flash('Vous devez être connecté pour effectuer cette action.', 'danger')
+        return redirect(url_for('login'))
+
+    # Get the user from the session
+    user = User.query.get(session['user_id'])
+    if user.email != 'bazizbadis13@gmail.com':  # Ensure the email is the one you specified
+        flash('Accès non autorisé.', 'danger')
+        return redirect(url_for('index'))
+
+    # Get the user to modify from the database
+    user_to_modify = User.query.get(user_id)
+    if not user_to_modify:
+        flash('Utilisateur non trouvé.', 'danger')
+        return redirect(url_for('db_panel'))
+
+    # If the method is POST, update the user data
+    if request.method == 'POST':
+        user_to_modify.nom = request.form.get('nom')
+        user_to_modify.prenom = request.form.get('prenom')
+        user_to_modify.email = request.form.get('email')
+        user_to_modify.role = request.form.get('role')
+        user_to_modify.is_verified = request.form.get('is_verified') == 'True'
+
+        db.session.commit()
+
+        flash(f"Utilisateur {user_to_modify.nom} modifié avec succès.", 'success')
+        return redirect(url_for('db_panel'))
+
+    # Render the modify user form
+    return render_template('modify_user_in_db.html', user=user_to_modify)
 
 if __name__ == '__main__':
     app.run(debug=True)

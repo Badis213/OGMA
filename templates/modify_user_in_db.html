@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier Utilisateur</title>
+</head>
+<body>
+    <h1>Modifier Utilisateur</h1>
+
+    <form action="{{ url_for('modify_user_in_db', user_id=user.id) }}" method="post">
+        <label for="nom">Nom:</label>
+        <input type="text" name="nom" id="nom" value="{{ user.nom }}" required><br><br>
+
+        <label for="prenom">Prénom:</label>
+        <input type="text" name="prenom" id="prenom" value="{{ user.prenom }}" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" value="{{ user.email }}" required><br><br>
+
+        <label for="role">Role:</label>
+        <select name="role" id="role">
+            <option value="membre" {% if user.role == 'membre' %}selected{% endif %}>Membre</option>
+            <option value="président" {% if user.role == 'président' %}selected{% endif %}>Président</option>
+            <option value="vice-président" {% if user.role == 'vice-président' %}selected{% endif %}>Vice-président</option>
+            <option value="développeur" {% if user.role == 'développeur' %}selected{% endif %}>Développeur</option>
+        </select><br><br>
+
+        <label for="is_verified">Vérifié:</label>
+        <select name="is_verified" id="is_verified">
+            <option value="True" {% if user.is_verified %}selected{% endif %}>Oui</option>
+            <option value="False" {% if not user.is_verified %}selected{% endif %}>Non</option>
+        </select><br><br>
+
+        <button type="submit">Enregistrer les modifications</button>
+    </form>
+
+</body>
+</html>
