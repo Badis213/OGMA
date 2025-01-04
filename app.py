@@ -77,10 +77,8 @@ class ContactMessage(db.Model):
         return f"<Message {self.id} from {self.name}>"
 
 
-# Create the database file if it doesn't exist
-if not os.path.exists(db_path):
-    with app.app_context():
-        db.create_all()  # This will create the tables based on your models
+with app.app_context():  # Ensuring app context is available
+    db.create_all()  # Create all tables defined in your models
 
 
 # Permission lists
