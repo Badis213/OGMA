@@ -136,9 +136,9 @@ def event_signin():
         return redirect(url_for('profil'))  # Redirect to homepage or any other page
     
     # Dummy event data, you would later fetch it from the database
-    event_date = "12/01/2025"  # Example date (d/m/y)
-    event_time = "14:30"       # Example time (xhy)
-    event_place = "Salle A"    # Example location
+    event_date = "18/01/2025"  # Example date (d/m/y)
+    event_time = "(heure pas encore connue)"       # Example time (xhy)
+    event_place = "Pont Du Casse (addresse exacte pas encore connue)"    # Example location
 
     if request.method == 'POST':
         # Retrieve form data
