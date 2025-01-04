@@ -40,7 +40,7 @@
                             <td>{{ user.role }}</td>
                             <td>{{ 'Oui' if user.is_verified else 'Non' }}</td>
                             <td>
-                                {% if logged_in_user.role == "président" %}
+                                {% if logged_in_user.role in ["président", "vice-président", "secrétaire", "admin", "développeur"] %}
                                     <!-- Toggle Verification (Only accessible by president) -->
                                     <form method="POST" action="{{ url_for('toggle_verification', user_id=user.id) }}">
                                         <button type="submit" class="modify">
@@ -49,7 +49,7 @@
                                     </form>
                                 {% endif %}
 
-                                {% if logged_in_user.role in ["président", "vice-président"] %}
+                                {% if logged_in_user.role in ["président", "vice-président", "développeur", "admin"] %}
                                     <!-- Modify Role (Only accessible by president or vice-président) -->
                                     <form method="POST" action="{{ url_for('change_role', user_id=user.id) }}">
                                         <select name="role">
@@ -99,7 +99,7 @@
                             <td>{{ registration.email }}</td>
                             <td>{{ registration.status }}</td>
                             <td>
-                                {% if logged_in_user.role in ["président", "admin"] %}
+                                {% if logged_in_user.role in ["président", "vice-président", "secrétaire", "admin", "développeur"] %}
                                     <!-- Update Status (Only accessible by president or admin) -->
                                     <form method="POST" action="{{ url_for('update_status', registration_id=registration.id) }}">
                                         <select name="status">
@@ -117,7 +117,7 @@
                         
                     </tbody>
                 </table>
-                {% if logged_in_user.role in ["président", "admin", "secrétaire", "vice-président"] %}            
+                {% if logged_in_user.role in ["président", "vice-président", "secrétaire", "admin", "développeur"] %}            
                 <form method="POST" action="{{ url_for('clear_event_registrations') }}">
                     <button type="submit" class="delete">Effacer les inscriptions passées</button>
                 </form>
