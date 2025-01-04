@@ -7,3 +7,4 @@ Werkzeug
 Flask-Cors
 python-dotenv
 gunicorn
+psycopg2-binary
