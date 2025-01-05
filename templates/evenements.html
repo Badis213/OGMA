@@ -66,10 +66,16 @@
                 </p>
                 <a href="#" class="btn-event" data-title="Soirée Raclette et Première Assemblée Générale" 
                 data-date="18 janvier 2025" 
-                data-description="Rejoignez-nous pour une soirée chill autour d'une raclette et de la première assemblée générale de l'association OGMA. Une excellente occasion de rencontrer les autres membres, échanger des idées et passer un moment convivial.">
+                data-description="Rejoignez-nous pour une soirée chill autour d'une raclette et de la première assemblée générale de l'association OGMA. Une excellente occasion de rencontrer les autres membres, échanger des idées, exprimer votre avis, et passer un moment convivial.">
                     Voir plus
                 </a>
+                {% if already_signed %}
+                <!-- If the user is already registered, show the 'Déjà inscrit' button -->
+                <button class="btn-inscription-deja-inscrit" disabled>Déjà inscrit</button>
+                {% else %}
+                <!-- If the user is not registered, show the 'S'inscrire à l'événement' button -->
                 <a href="{{ url_for('event_signin') }}" class="btn-inscription" id="inscription-btn">S'inscrire à l'événement</a>
+                {% endif %}
             </div>
         </div>
     </section>

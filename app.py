@@ -89,6 +89,13 @@ clear_registrations_permissions = ["président", "vice-président", "secrétaire
 def is_logged_in():
     return 'user_id' in session
 
+def is_signed_to_event(user_email):
+    # Check if there's any registration with the given email
+    registration = EventRegistration.query.filter_by(email=user_email).first()
+    
+    # Return True if a registration exists, otherwise return False
+    return registration is not None
+
 # Routes
 @app.route('/')
 def index():
@@ -96,7 +103,12 @@ def index():
 
 @app.route('/evenements')
 def evenements():
-    return render_template('evenements.html')
+    # Check if the user is logged in
+    if 'user_email' in session:
+        user_email = session['user_email']  # Assuming the user's email is stored in the session
+        already_signed = is_signed_to_event(user_email)
+
+    return render_template('evenements.html', already_signed=already_signed)
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
@@ -459,6 +471,32 @@ def delete_message(message_id):
     db.session.commit()
     flash("Message supprimé avec succès.", 'success')
     return redirect(url_for('admin_panel'))
+
+@app.route('/delete-event-registration/<int:registration_id>', methods=['POST'])
+def delete_event_registration(registration_id):
+    if not is_logged_in():
+        flash('Vous devez être connecté pour effectuer cette action.', 'danger')
+        return redirect(url_for('login'))
+
+    # Ensure only authorized users can delete (president, admin, etc.)
+    user = User.query.get(session['user_id'])
+    if user.role not in ["président", "vice-président", "secrétaire", "admin", "développeur"]:
+        flash('Accès non autorisé.', 'danger')
+        return redirect(url_for('profil'))
+
+    # Get the registration to delete
+    registration = EventRegistration.query.get(registration_id)
+    if not registration:
+        flash('Inscription non trouvée.', 'danger')
+        return redirect(url_for('admin-panel'))
+
+    # Delete the registration
+    db.session.delete(registration)
+    db.session.commit()
+
+    flash(f"Inscription de {registration.nom} {registration.prenom} supprimée avec succès.", 'success')
+    return redirect(url_for('admin-panel'))
+
 
 @app.route('/db-panel')
 def db_panel():

@@ -385,3 +385,23 @@ footer .social-links a:hover {
         text-align: center;
     }
 }
+
+/* Bouton "Déjà inscrit" */
+.btn-inscription-deja-inscrit {
+    display: inline-block;
+    color: #28a745; /* Green color for text */
+    padding: 8px 16px;
+    border: 2px solid #28a745; /* Green border */
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 10px;
+    background-color: transparent; /* Transparent background */
+    transition: all 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.btn-inscription-deja-inscrit:hover {
+    background-color: #28a745; /* Green background when hovered */
+    color: white; /* White text when hovered */
+}

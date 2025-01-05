@@ -109,7 +109,9 @@
                                         </select>
                                         <button type="submit" class="modify">Mettre à jour</button>
                                     </form>
-                                    <!-- Clear Registrations Button (Only accessible by president) -->
+                                    <form method="POST" action="{{ url_for('delete_event_registration', registration_id=registration.id) }}" style="display:inline;">
+                                        <button type="submit" class="delete">Supprimer</button>
+                                    </form>
                                 {% endif %}
                             </td>
                         </tr>
