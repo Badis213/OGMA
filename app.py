@@ -89,13 +89,6 @@ clear_registrations_permissions = ["président", "vice-président", "secrétaire
 def is_logged_in():
     return 'user_id' in session
 
-def is_signed_to_event(user_email):
-    # Check if there's any registration with the given email
-    registration = EventRegistration.query.filter_by(email=user_email).first()
-    
-    # Return True if a registration exists, otherwise return False
-    return registration is not None
-
 # Routes
 @app.route('/')
 def index():
@@ -103,13 +96,7 @@ def index():
 
 @app.route('/evenements')
 def evenements():
-    already_signed = False    
-
-    if 'user_email' in session:
-        user_email = session['user_email']  # Assuming the user's email is stored in the session
-        already_signed = is_signed_to_event(user_email)
-
-    return render_template('evenements.html', already_signed=already_signed)
+    return render_template('evenements.html')
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
