@@ -103,13 +103,13 @@ def index():
 
 @app.route('/evenements')
 def evenements():
-    # Check if the user is logged in
+    already_signed = False    
+
     if 'user_email' in session:
         user_email = session['user_email']  # Assuming the user's email is stored in the session
         already_signed = is_signed_to_event(user_email)
-        return render_template('evenements.html', already_signed=already_signed)
 
-    return render_template('evenements.html')
+    return render_template('evenements.html', already_signed=already_signed)
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
