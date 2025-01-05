@@ -107,8 +107,9 @@ def evenements():
     if 'user_email' in session:
         user_email = session['user_email']  # Assuming the user's email is stored in the session
         already_signed = is_signed_to_event(user_email)
+        return render_template('evenements.html', already_signed=already_signed)
 
-    return render_template('evenements.html', already_signed=already_signed)
+    return render_template('evenements.html')
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
