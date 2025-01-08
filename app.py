@@ -446,8 +446,8 @@ def clear_event_registrations():
 
 @app.route('/admin/messages/delete/<int:message_id>', methods=['POST'])
 def delete_message(message_id):
-    if not is_logged_in() or g.logged_in_user.role != "président":
-        flash("Seul le président peut supprimer des messages.", 'danger')
+    if not is_logged_in() or g.logged_in_user.role not in clear_registrations_permissions:
+        flash("Vous n'êtes pas autorisé à supprimer des messages.", 'danger')
         return redirect(url_for('admin_panel'))
 
     message = ContactMessage.query.get(message_id)
@@ -476,14 +476,14 @@ def delete_event_registration(registration_id):
     registration = EventRegistration.query.get(registration_id)
     if not registration:
         flash('Inscription non trouvée.', 'danger')
-        return redirect(url_for('admin-panel'))
+        return redirect(url_for('admin_panel'))
 
     # Delete the registration
     db.session.delete(registration)
     db.session.commit()
 
     flash(f"Inscription de {registration.nom} {registration.prenom} supprimée avec succès.", 'success')
-    return redirect(url_for('admin-panel'))
+    return redirect(url_for('admin_panel'))
 
 
 @app.route('/db-panel')
