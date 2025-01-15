@@ -137,8 +137,8 @@ def event_signin():
     
     # Dummy event data, you would later fetch it from the database
     event_date = "18/01/2025"  # Example date (d/m/y)
-    event_time = "(heure pas encore connue)"       # Example time (xhy)
-    event_place = "Pont Du Casse (addresse exacte pas encore connue)"    # Example location
+    event_time = "14h00"       # Example time (xhy)
+    event_place = "Florida Agen"    # Example location
 
     if request.method == 'POST':
         # Retrieve form data
