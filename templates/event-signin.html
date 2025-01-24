@@ -61,10 +61,26 @@
             </div>
 
             <!-- Certification -->
-            <div>
-                <label for="confirmation">Je certifie être là le {{ event_date }} à {{ event_time }} au lieu : {{ event_place }}</label>
-                <input type="checkbox" id="confirmation" name="confirmation" required>
+            <div class="confirmation-wrapper">
+                <label class="neon-checkbox">
+                    <input type="checkbox" id="confirmation" name="confirmation" required />
+                    <div class="neon-checkbox__frame">
+                      <div class="neon-checkbox__box">
+                        <div class="neon-checkbox__check-container">
+                          <svg viewBox="0 0 24 24" class="neon-checkbox__check">
+                            <path d="M3,12.5l7,7L21,5"></path>
+                          </svg>
+                        </div>
+                        <div class="neon-checkbox__glow"></div>
+                      </div>
+                    </div>
+                  </label>
+                <label for="confirmation">
+                  Je certifie être là le {{ event_date }} à {{ event_time }} au lieu : {{ event_place }}
+                </label>
             </div>
+              
+              
             
 
             <button type="submit">S'inscrire à l'événement</button>

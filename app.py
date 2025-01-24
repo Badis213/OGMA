@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, make_response, session, g
+from flask import Flask, render_template, request, redirect, url_for, flash, make_response, session, g, send_file
 from flask_sqlalchemy import SQLAlchemy
 from flask_session import Session
 from flask_bcrypt import Bcrypt
@@ -16,10 +16,13 @@ CORS(app)
 
 load_dotenv()
 
+supabase_uri = os.getenv('SUPABASE_URI')
+
 # Now you can access the environment variables
 app.config['SECRET_KEY'] = os.getenv('FLASK_SECRET_KEY')
 app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
-app.config['SQLALCHEMY_DATABASE_URI'] = f"{os.getenv('DB_URL')}"
+#app.config['SQLALCHEMY_DATABASE_URI'] = f"{os.getenv('DB_URL')}"
+app.config['SQLALCHEMY_DATABASE_URI'] = f'{supabase_uri}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # To disable a feature that uses memory for tracking
 
 # Initialisation des extensions
