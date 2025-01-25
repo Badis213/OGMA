@@ -20,7 +20,7 @@ load_dotenv()
 app.config['SECRET_KEY'] = os.getenv('FLASK_SECRET_KEY')
 app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
 #app.config['SQLALCHEMY_DATABASE_URI'] = f"{os.getenv('DB_URL')}"
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('POSTGRE_URL')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SUPABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # To disable a feature that uses memory for tracking
 
 # Initialisation des extensions
