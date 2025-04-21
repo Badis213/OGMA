@@ -9,6 +9,8 @@ from dotenv import load_dotenv
 import re
 from datetime import datetime, timedelta
 import os
+from sqlalchemy import create_engine
+from sqlalchemy.orm import scoped_session, sessionmaker
 
 # Initialisation de l'application Flask
 app = Flask(__name__)
@@ -16,28 +18,57 @@ CORS(app)
 
 load_dotenv()
 
-# Now you can access the environment variables
+# Load environment variables
 app.config['SECRET_KEY'] = os.getenv('FLASK_SECRET_KEY')
 app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
-#app.config['SQLALCHEMY_DATABASE_URI'] = f"{os.getenv('DB_URL')}"
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SUPABASE_URL')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # To disable a feature that uses memory for tracking
 
-# Initialisation des extensions
+# ✅ Use Transaction Mode Pooler URL (not Session Mode)
+# e.g. 'postgresql://username:password@aws-0-eu-west-3.transac.pooler.supabase.com:5432/postgres'
+DATABASE_URL = os.getenv('SUPABASE_URL')
+
+engine = create_engine(
+    DATABASE_URL,
+    pool_size=10,           # Augmente la taille du pool
+    max_overflow=5,         # Permet quelques connexions supplémentaires
+    pool_timeout=30,        # Timeout si la connexion prend trop de temps
+    pool_recycle=3600,      # Temps avant qu'une connexion soit recyclée (en secondes)
+)
+
+from sqlalchemy.exc import OperationalError
+
+@app.teardown_appcontext
+def shutdown_session(exception=None):
+    try:
+        db_session.remove()
+    except OperationalError:
+        print("Database connection failed. Consider checking connection settings.")
+
+
+# ✅ Scoped session for thread-safe session handling
+db_session = scoped_session(sessionmaker(bind=engine))
+
+# ✅ Keep SQLAlchemy for models only
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 
-# Flask-Session configuration (stores sessions in database)
-app.config['SESSION_TYPE'] = 'sqlalchemy'  # You can change this to 'filesystem' if you want to store it in files
-app.config['SESSION_SQLALCHEMY'] = db  # Using the same SQLAlchemy instance for session storage
-app.config['SESSION_PERMANENT'] = True  # Keep sessions persistent
+# ✅ Flask-Session configuration (using filesystem instead of database)
+app.config['SESSION_TYPE'] = 'filesystem'
+app.config['SESSION_PERMANENT'] = True
 app.config['SESSION_USE_SIGNER'] = True
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)  # Sessions will last for 7 days
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)
 
-Session(app)  # Initialize Flask-Session to use server-side sessions
+Session(app)  # Initialize Flask-Session
 
-# Modèle utilisateur et inscription évenement
+# ✅ Clean up DB sessions on teardown
+@app.teardown_appcontext
+def shutdown_session(exception=None):
+    db_session.remove()
+
+# Models
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nom = db.Column(db.String(100), nullable=False)
@@ -60,7 +91,7 @@ class EventRegistration(db.Model):
     email = db.Column(db.String(100))
     classe = db.Column(db.String(100))
     mode = db.Column(db.String(100))
-    confirmation = db.Column(db.Boolean)  # Add this line
+    confirmation = db.Column(db.Boolean)
     status = db.Column(db.String(100))
 
 class ContactMessage(db.Model):
@@ -72,11 +103,6 @@ class ContactMessage(db.Model):
 
     def __repr__(self):
         return f"<Message {self.id} from {self.name}>"
-
-
-with app.app_context():  # Ensuring app context is available
-    db.create_all()  # Create all tables defined in your models
-
 
 # Permission lists
 admin_panel_permissions = ["président", "vice-président", "secrétaire", "admin", "développeur"]
@@ -137,7 +163,7 @@ def event_signin():
         return redirect(url_for('profil'))  # Redirect to homepage or any other page
     
     # Dummy event data, you would later fetch it from the database
-    event_date = "08/02/2025"  # Example date (d/m/y)
+    event_date = "26/04/2025"  # Example date (d/m/y)
     event_time = "14h00"       # Example time (xhy)
     event_place = "Florida Agen"    # Example location
 
@@ -171,7 +197,10 @@ def event_signin():
     # For GET request, render the page with the current event details
     return render_template('event-signin.html', user=user, event_date=event_date, event_time=event_time, event_place=event_place)
 
-    
+@app.route('/status')
+def status():
+    return render_template('status.html')    
+
 @app.route('/signin', methods=['POST', 'GET'])
 def signin():
     if request.method == 'POST':
