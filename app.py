@@ -9,8 +9,8 @@ from dotenv import load_dotenv
 import re
 from datetime import datetime, timedelta
 import os
-from flask import g
-from sqlalchemy.orm import scoped_session
+from sqlalchemy import create_engine
+from sqlalchemy.orm import scoped_session, sessionmaker
 
 # Initialisation de l'application Flask
 app = Flask(__name__)
@@ -18,36 +18,47 @@ CORS(app)
 
 load_dotenv()
 
-# Now you can access the environment variables
+# Load environment variables
 app.config['SECRET_KEY'] = os.getenv('FLASK_SECRET_KEY')
 app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
-#app.config['SQLALCHEMY_DATABASE_URI'] = f"{os.getenv('DB_URL')}"
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SUPABASE_URL')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # To disable a feature that uses memory for tracking
-# SQLAlchemy Configuration for Connection Pooling
 
-# Initialisation des extensions
+# ✅ Use Transaction Mode Pooler URL (not Session Mode)
+# e.g. 'postgresql://username:password@aws-0-eu-west-3.transac.pooler.supabase.com:5432/postgres'
+DATABASE_URL = os.getenv('SUPABASE_URL')
+
+# ✅ Configure SQLAlchemy Connection Pool
+engine = create_engine(
+    DATABASE_URL,
+    pool_size=5,          # Max connections in pool
+    max_overflow=0,       # No extra connections beyond pool_size
+    pool_timeout=30,      # Wait 30 seconds before failing if pool is exhausted
+)
+
+# ✅ Scoped session for thread-safe session handling
+db_session = scoped_session(sessionmaker(bind=engine))
+
+# ✅ Keep SQLAlchemy for models only
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 
-# Flask-Session configuration (stores sessions in database)
-app.config['SESSION_TYPE'] = 'sqlalchemy'  # You can change this to 'filesystem' if you want to store it in files
-app.config['SESSION_SQLALCHEMY'] = db  # Using the same SQLAlchemy instance for session storage
-app.config['SESSION_PERMANENT'] = True  # Keep sessions persistent
+# ✅ Flask-Session configuration (using filesystem instead of database)
+app.config['SESSION_TYPE'] = 'filesystem'
+app.config['SESSION_PERMANENT'] = True
 app.config['SESSION_USE_SIGNER'] = True
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)  # Sessions will last for 7 days
-app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
-    'pool_size': 10,  # Increase the pool size to handle more simultaneous connections
-    'max_overflow': 5,  # Allow a few extra connections beyond the pool size
-    'pool_timeout': 30,  # Timeout for acquiring a connection from the pool
-    'pool_recycle': 3600,  # Recycle connections after 1 hour
-}
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)
 
+Session(app)  # Initialize Flask-Session
 
-Session(app)  # Initialize Flask-Session to use server-side sessions
+# ✅ Clean up DB sessions on teardown
+@app.teardown_appcontext
+def shutdown_session(exception=None):
+    db_session.remove()
 
-# Modèle utilisateur et inscription évenement
+# Models
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nom = db.Column(db.String(100), nullable=False)
@@ -70,7 +81,7 @@ class EventRegistration(db.Model):
     email = db.Column(db.String(100))
     classe = db.Column(db.String(100))
     mode = db.Column(db.String(100))
-    confirmation = db.Column(db.Boolean)  # Add this line
+    confirmation = db.Column(db.Boolean)
     status = db.Column(db.String(100))
 
 class ContactMessage(db.Model):
