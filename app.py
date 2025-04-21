@@ -26,13 +26,21 @@ app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
 # e.g. 'postgresql://username:password@aws-0-eu-west-3.transac.pooler.supabase.com:5432/postgres'
 DATABASE_URL = os.getenv('SUPABASE_URL')
 
-# ✅ Configure SQLAlchemy Connection Pool
 engine = create_engine(
     DATABASE_URL,
-    pool_size=5,          # Max connections in pool
-    max_overflow=0,       # No extra connections beyond pool_size
-    pool_timeout=30,      # Wait 30 seconds before failing if pool is exhausted
+    pool_size=3,          # Essayez de réduire le nombre de connexions dans le pool
+    max_overflow=0,       # Limiter les connexions au pool_size
+    pool_timeout=30,      # Augmenter si nécessaire le temps d'attente pour les connexions
 )
+from sqlalchemy.exc import OperationalError
+
+@app.teardown_appcontext
+def shutdown_session(exception=None):
+    try:
+        db_session.remove()
+    except OperationalError:
+        print("Database connection failed. Consider checking connection settings.")
+
 
 # ✅ Scoped session for thread-safe session handling
 db_session = scoped_session(sessionmaker(bind=engine))
