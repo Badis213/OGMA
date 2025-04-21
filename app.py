@@ -25,11 +25,6 @@ app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SUPABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # To disable a feature that uses memory for tracking
 # SQLAlchemy Configuration for Connection Pooling
-# Increase pool size and set a higher timeout
-app.config['SQLALCHEMY_POOL_SIZE'] = 20  # Increase the pool size (default is 5)
-app.config['SQLALCHEMY_POOL_TIMEOUT'] = 60  # Increase the timeout (default is 10 seconds)
-app.config['SQLALCHEMY_MAX_OVERFLOW'] = 40  # Allow some connections beyond the pool size (default is 10)
-
 
 # Initialisation des extensions
 db = SQLAlchemy(app)
