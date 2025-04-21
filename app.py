@@ -142,7 +142,7 @@ def event_signin():
         return redirect(url_for('profil'))  # Redirect to homepage or any other page
     
     # Dummy event data, you would later fetch it from the database
-    event_date = "08/02/2025"  # Example date (d/m/y)
+    event_date = "26/04/2025"  # Example date (d/m/y)
     event_time = "14h00"       # Example time (xhy)
     event_place = "Florida Agen"    # Example location
 
@@ -176,7 +176,10 @@ def event_signin():
     # For GET request, render the page with the current event details
     return render_template('event-signin.html', user=user, event_date=event_date, event_time=event_time, event_place=event_place)
 
-    
+@app.route('/status')
+def status():
+    return render_template('status.html')    
+
 @app.route('/signin', methods=['POST', 'GET'])
 def signin():
     if request.method == 'POST':
