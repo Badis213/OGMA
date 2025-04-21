@@ -123,10 +123,6 @@ def contact():
 def bureau_provisoire():
     return render_template('bureau-provisoire.html')
 
-@app.route('/status')
-def status():
-    return render_template('status.html')
-
 @app.route('/event-signin', methods=['GET', 'POST'])
 def event_signin():
     if not is_logged_in():
