@@ -37,6 +37,13 @@ app.config['SESSION_SQLALCHEMY'] = db  # Using the same SQLAlchemy instance for 
 app.config['SESSION_PERMANENT'] = True  # Keep sessions persistent
 app.config['SESSION_USE_SIGNER'] = True
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)  # Sessions will last for 7 days
+app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+    'pool_size': 10,  # Increase the pool size to handle more simultaneous connections
+    'max_overflow': 5,  # Allow a few extra connections beyond the pool size
+    'pool_timeout': 30,  # Timeout for acquiring a connection from the pool
+    'pool_recycle': 3600,  # Recycle connections after 1 hour
+}
+
 
 Session(app)  # Initialize Flask-Session to use server-side sessions
 
@@ -92,15 +99,6 @@ clear_registrations_permissions = ["président", "vice-président", "secrétaire
 
 def is_logged_in():
     return 'user_id' in session
-
-from flask import g
-from sqlalchemy.orm import scoped_session
-
-@app.teardown_appcontext
-def shutdown_session(exception=None):
-    """Ensure that the session is removed at the end of each request."""
-    db.session.remove()
-
 
 # Routes
 @app.route('/')
