@@ -30,8 +30,6 @@ engine = create_engine(
     DATABASE_URL,
     pool_size=10,           # Augmente la taille du pool
     max_overflow=5,         # Permet quelques connexions supplémentaires
-    pool_timeout=30,        # Timeout si la connexion prend trop de temps
-    pool_recycle=3600,      # Temps avant qu'une connexion soit recyclée (en secondes)
 )
 
 from sqlalchemy.exc import OperationalError
@@ -197,9 +195,9 @@ def event_signin():
     # For GET request, render the page with the current event details
     return render_template('event-signin.html', user=user, event_date=event_date, event_time=event_time, event_place=event_place)
 
-@app.route('/status')
+@app.route('/statuts')
 def status():
-    return render_template('status.html')    
+    return render_template('statuts.html')    
 
 @app.route('/signin', methods=['POST', 'GET'])
 def signin():
