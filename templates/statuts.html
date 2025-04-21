@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OGMA - Statuts De L'Association</title>
+    <link rel="stylesheet" href="../static/css/style-statuts.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">OGMA</div>
+        <!-- Bouton hamburger -->
+        <div class="hamburger" id="hamburger">
+            &#9776; <!-- Symbole hamburger -->
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="{{ url_for('index') }}">Accueil</a></li>
+            <li><a href="{{ url_for('evenements') }}">Événements</a></li>
+            <li><a href="{{ url_for('bureau_provisoire') }}">Bureau Provisoire</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+
+            <!-- Display these links only if the user is NOT logged in -->
+            {% if 'user_id' not in session %}
+            <li id="auth-links">
+                <a href="{{ url_for('signin') }}" id="signin">S'inscrire</a>
+            </li>
+            <li id="auth-links">
+                <a href="{{ url_for('login') }}" id="login">Se connecter</a>
+            </li>
+            {% endif %}
+
+            <!-- Display these links only if the user IS logged in -->
+            {% if 'user_id' in session %}
+            <li id="profile-link">
+                <a href="{{ url_for('profil') }}">Profil</a>
+            </li>
+            <li id="logout-link">
+                <a href="{{ url_for('logout') }}" id="logout">Se déconnecter</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    <header>
+        <h1>LES STATUTS DE L'ASSOCIATION OGMA</h1>
+    </header>
+    <main>
+        <h2>Article Premier - Nom</h2>
+        <p>Il est fondé entre les adhérents aux présents statuts une association régie par la loi du 1er juillet 1901 et le décret du 16 août 1901, ayant pour titre <strong>Ogma</strong>.</p>
+
+        <h2>Article 2 - But / Objet</h2>
+        <p>Cette association a pour objet d’offrir un cadre de débats et de discussion sur des sujets de société pour tou.te.s, en particulier pour permettre à un maximum de jeunes de se questionner, de donner leur opinion ainsi que d’apprendre à manier la parole.</p>
+
+        <h2>Article 3 - Siège social</h2>
+        <p>Le siège social est fixé au 1 rue Lacépède, 47000, Agen, France.</p>
+
+        <h2>Article 4 - Durée</h2>
+        <p>La durée de l’association est illimitée.</p>
+
+        <h2>Article 5 - Composition</h2>
+        <p>L'association se compose de membres actifs, qui participent activement à la vie associative - simples adhérents.</p>
+
+        <h2>Article 6 - Admission</h2>
+        <p>Le candidat doit, pour être admis, correspondre aux critères moraux fixés dans le règlement intérieur.</p>
+
+        <h2>Article 7 - Membres – Cotisations</h2>
+        <p>Sont membres actifs ceux qui ont pris l'engagement de verser annuellement une somme d’au moins 1€ à titre de cotisation.</p>
+
+        <h2>Article 8 - Radiations</h2>
+        <p>La qualité de membre se perd par :</p>
+        <ul>
+            <li>La démission ;</li>
+            <li>Le décès ;</li>
+            <li>La radiation prononcée par le conseil d'administration pour non-paiement de la cotisation ou pour motif grave, l'intéressé ayant été invité à fournir des explications devant le bureau et/ou par écrit.</li>
+        </ul>
+        <p>La radiation est prononcée à la majorité absolue par le conseil d’administration. Le membre peut demander un nouveau vote. Les motifs graves seront précisés dans le règlement intérieur.</p>
+
+        <h2>Article 9 - Ressources</h2>
+        <p>Les ressources de l'association comprennent :</p>
+        <ol>
+            <li>Le montant des cotisations ;</li>
+            <li>Toute autre subvention ou don autorisé dans le cadre de la loi.</li>
+        </ol>
+
+        <h2>Article 10 - Assemblée Générale Ordinaire</h2>
+        <p>L'assemblée générale ordinaire comprend tous les membres. Elle se réunit deux fois par an. Quinze jours avant, les membres sont convoqués par le secrétaire avec l'ordre du jour.</p>
+        <p>Le président expose la situation morale ou l’activité ; le trésorier rend compte de sa gestion. L’AG fixe le montant des cotisations. Le quorum est fixé à 25% des adhérents présents ou représentés hors membres du bureau.</p>
+        <p>Toutes les décisions sont prises à main levée. Les décisions s’imposent à tous les membres.</p>
+
+        <h2>Article 11 - Assemblée Générale Extraordinaire</h2>
+        <p>Peut être convoquée par le président ou à la demande de la moitié plus un des membres. Modalités identiques à l’AG ordinaire. Uniquement pour la modification des statuts ou la dissolution. Décisions à la majorité des suffrages exprimés.</p>
+
+        <h2>Article 12 - Conseil d'Administration</h2>
+        <p>Le conseil est composé de 5 membres élus pour 6 mois, rééligibles. En cas de vacance, remplacement provisoire jusqu’à la prochaine AG. Réunion au moins tous les 6 mois. Décisions à la majorité, voix prépondérante du président.</p>
+        <p>Absence non justifiée à 3 réunions = démission. Le conseil peut déléguer certains pouvoirs à ses membres.</p>
+
+        <h2>Article 13 – Bureau</h2>
+        <p>Le conseil élit parmi ses membres :</p>
+        <ul>
+            <li>Un-e président-e ;</li>
+            <li>Un-e vice-président-e ;</li>
+            <li>Un-e secrétaire (et éventuellement un-e secrétaire adjoint-e) ;</li>
+            <li>Un-e trésorier-e.</li>
+        </ul>
+        <p>Aucune fonction n’est cumulable.</p>
+
+        <h2>Article 14 – Indemnités</h2>
+        <p>Les fonctions sont bénévoles. Seuls les frais justifiés sont remboursés. Le rapport financier précise les remboursements par bénéficiaire.</p>
+
+        <h2>Article 15 - Règlement Intérieur</h2>
+        <p>Établi par le conseil d’administration, approuvé par l’AG. Il fixe les points non prévus dans les statuts.</p>
+
+        <h2>Article 16 - Dissolution</h2>
+        <p>En cas de dissolution (article 11), un ou plusieurs liquidateurs sont nommés. L’actif net est dévolu selon les décisions de l’AG extraordinaire.</p>
+
+        <p><strong>Fait à Agen, le 04/04/2025.</strong></p>
+
+        <p><strong>Signatures des représentants :</strong></p>
+        <ul>
+            <li>Nom, prénom, fonction</li>
+            <li>Nom, prénom, fonction</li>
+        </ul>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <p>&copy 2024 OGMA - Tous droits réservés</p>
+            <div class="social-links">
+                <a href="https://instagram.com/ogma_asso" target="_blank">Instagram</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

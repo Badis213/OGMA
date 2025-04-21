@@ -1,0 +1,246 @@
+@font-face {
+    font-family: 'LOT';
+    src: url('../fonts/LOT.otf') format('truetype');
+}
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: white;
+    line-height: 1.6;
+}
+
+/* Navbar container */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    background-color: #111; /* Fond sombre pour la navbar */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Logo */
+.navbar .logo {
+    font-size: 24px;
+    font-family: 'LOT';
+    color: white;
+}
+
+/* Navbar Links */
+.nav-links {
+    display: flex; /* Affichage horizontal pour les grands écrans */
+    list-style: none;
+    margin-left: auto; /* Aligner les liens à droite */
+    gap: 20px; /* Espacement uniforme entre les éléments */
+}
+
+.nav-links li {
+    margin: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+    font-size: 14px;
+    padding: 5px 10px;
+}
+
+.nav-links a:hover {
+    color: #a7a7a7;
+    background-color: rgba(255, 255, 255, 0.1); /* léger fond sur hover */
+    border-radius: 5px;
+}
+
+/* Liens de connexion et d'inscription à droite */
+#auth-links {
+    display: flex;
+    gap: 20px;
+}
+
+#auth-links a {
+    font-size: 14px;
+    padding: 5px 15px;
+    border-radius: 30px; /* Bord arrondi pour un effet moderne */
+    background-color: #444; /* Fond de l'arrière-plan */
+    transition: background-color 0.3s ease;
+}
+
+#auth-links a:hover {
+    background-color: #666; /* Fond plus clair au survol */
+}
+
+/* Profil */
+#profile-link a {
+    font-size: 14px;
+    padding: 5px 15px;
+    border-radius: 30px;
+    background-color: #444;
+    transition: background-color 0.3s ease;
+}
+
+#profile-link a:hover {
+    background-color: #666;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 15px 20px;
+    }
+
+    .nav-links {
+        display: none; /* Masquer les liens sur petits écrans */
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 100%;
+        background-color: #111;
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .nav-links.active {
+        display: flex; /* Afficher les liens quand ils sont actifs */
+    }
+
+    .nav-links li {
+        margin-bottom: 20px; /* Espacement vertical entre les éléments */
+    }
+
+    #auth-links {
+        display: none; /* Cacher les liens d'inscription et connexion sur mobile */
+    }
+}
+
+
+/* Header */
+header {
+    background-color: #111;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    margin-top: 150px;
+    margin-bottom: 30px;
+    font-size: 36px;
+    font-family: 'Arial';
+    letter-spacing: 2px;
+    color: white;
+}
+
+/* Main Content */
+main {
+    padding: 40px 50px 50px 20px;
+    margin: 70px;
+    background-color: #222;
+    border-radius: 10px;
+    border: none;
+    box-shadow: #111;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #fff;
+    border-bottom: 2px solid #444;
+    padding-bottom: 5px;
+}
+
+p, ul, ol {
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+strong {
+    font-weight: bold;
+}
+
+ul, ol {
+    margin-left: 20px;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+ol {
+    list-style-type: decimal;
+}
+
+ul {
+    list-style-type: disc;
+}
+
+/* Footer */
+footer {
+    background-color: #111;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+footer .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+footer .social-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 10px;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+footer .social-links a:hover {
+    color: #a7a7a7;
+}
+
+/* Links */
+a {
+    text-decoration: none;
+    color: white;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 28px;
+    }
+
+    main {
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    p, ul, ol {
+        font-size: 14px;
+    }
+
+    footer {
+        padding: 15px;
+    }
+}
