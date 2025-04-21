@@ -94,11 +94,6 @@ class ContactMessage(db.Model):
     def __repr__(self):
         return f"<Message {self.id} from {self.name}>"
 
-
-with app.app_context():  # Ensuring app context is available
-    db.create_all()  # Create all tables defined in your models
-
-
 # Permission lists
 admin_panel_permissions = ["président", "vice-président", "secrétaire", "admin", "développeur"]
 change_verification_permissions = ["président", "vice-président", "secrétaire", "admin", "développeur"]
