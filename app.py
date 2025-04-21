@@ -9,6 +9,8 @@ from dotenv import load_dotenv
 import re
 from datetime import datetime, timedelta
 import os
+from flask import g
+from sqlalchemy.orm import scoped_session
 
 # Initialisation de l'application Flask
 app = Flask(__name__)
@@ -23,9 +25,9 @@ app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SUPABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # To disable a feature that uses memory for tracking
 # SQLAlchemy Configuration for Connection Pooling
-app.config['SQLALCHEMY_POOL_SIZE'] = 10  # Number of database connections to keep open in the pool
+app.config['SQLALCHEMY_POOL_SIZE'] = 20
 app.config['SQLALCHEMY_POOL_RECYCLE'] = 1800  # Number of seconds after which a connection is recycled
-app.config['SQLALCHEMY_POOL_TIMEOUT'] = 30  # Maximum wait time for a connection from the pool
+app.config['SQLALCHEMY_POOL_TIMEOUT'] = 30  # in seconds
 
 
 # Initialisation des extensions
@@ -94,6 +96,15 @@ clear_registrations_permissions = ["président", "vice-président", "secrétaire
 
 def is_logged_in():
     return 'user_id' in session
+
+from flask import g
+from sqlalchemy.orm import scoped_session
+
+@app.teardown_appcontext
+def shutdown_session(exception=None):
+    """Ensure that the session is removed at the end of each request."""
+    db.session.remove()
+
 
 # Routes
 @app.route('/')
